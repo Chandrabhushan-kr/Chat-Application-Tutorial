@@ -27,9 +27,10 @@ app.get("/", (req, res) => {
 
 //import routes
 import authRoutes from "./routes/auth.routes.js";
+import messageRoute from "./routes/message.routes.js";
 
-app.use("/api/auth",authRoutes)
-
+app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoute);
 app.listen(PORT, () => {
   console.log("Server is running on port: " + PORT);
 });
@@ -37,12 +38,12 @@ app.listen(PORT, () => {
 //error handler
 
 app.use((err, req, res, next) => {
-    const statusCode = err.statusCode || 500
-    const message = err.message || "Internal server error"
-    
-    return res.status(statusCode).json({
-        success: false,
-        statusCode,
-        message,
-    })
-})
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal server error";
+
+  return res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
